@@ -97,13 +97,16 @@ function renderAuth() {
     </header>
     <div class="panel fade-in">
       <div class="section-title">${isLogin ? 'Вход' : 'Регистрация'}</div>
-      <input id="auth-name" placeholder="Имя" autocomplete="username"
-             style="width:100%;padding:12px;background:var(--card);border:1px solid #3a3654;
-                    color:var(--text);border-radius:10px;margin-bottom:10px;font-family:inherit">
-      <input id="auth-pass" type="password" placeholder="Пароль" autocomplete="current-password"
-             style="width:100%;padding:12px;background:var(--card);border:1px solid #3a3654;
-                    color:var(--text);border-radius:10px;margin-bottom:14px;font-family:inherit">
-      <button class="btn" onclick="doAuth()">${isLogin ? 'Войти' : 'Создать аккаунт'}</button>
+      <form id="auth-form" onsubmit="event.preventDefault(); doAuth();" autocomplete="on">
+        <input id="auth-name" name="username" placeholder="Имя" autocomplete="username" required
+               style="width:100%;padding:12px;background:var(--card);border:1px solid #3a3654;
+                      color:var(--text);border-radius:10px;margin-bottom:10px;font-family:inherit">
+        <input id="auth-pass" name="password" type="password" placeholder="Пароль"
+               autocomplete="${isLogin ? 'current-password' : 'new-password'}" required minlength="4"
+               style="width:100%;padding:12px;background:var(--card);border:1px solid #3a3654;
+                      color:var(--text);border-radius:10px;margin-bottom:14px;font-family:inherit">
+        <button type="submit" class="btn">${isLogin ? 'Войти' : 'Создать аккаунт'}</button>
+      </form>
       <button class="btn secondary" style="margin-top:8px" onclick="toggleAuthMode()">
         ${isLogin ? 'Нет аккаунта? Регистрация' : 'Есть аккаунт? Войти'}
       </button>
